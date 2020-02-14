@@ -1,7 +1,7 @@
 {
     "name": "swagger-ui",
     "version": "3.24.3",
-    "main": "dist/swagger-ui.js",
+    "main": "app/swagger-ui.js",
     "homepage": "https://github.com/swagger-api/swagger-ui",
     "repository": "git@github.com:swagger-api/swagger-ui.git",
     "contributors": [
@@ -44,7 +44,7 @@
         "security-audit": "run-s -sc security-audit:all security-audit:prod",
         "security-audit:prod": "npm-audit-ci-wrapper -p -t low",
         "security-audit:all": "npm-audit-ci-wrapper -t moderate",
-        "serve-static": "http-server dist/ -i -a 127.0.0.1 -p 3002",
+        "serve-static": "http-server app/ -i -a 127.0.0.1 -p 3002",
         "start": "npm-run-all --parallel serve-static open-static"
     },
     "dependencies": {
@@ -160,7 +160,7 @@
     },
     "bundlesize": [
         {
-            "path": "./dist/swagger-ui-bundle.js",
+            "path": "./app/swagger-ui-bundle.js",
             "maxSize": "1 MB",
             "compression": "none"
     }
