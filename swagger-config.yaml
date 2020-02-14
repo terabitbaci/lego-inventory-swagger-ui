@@ -1,4 +1,4 @@
 ---
-url: "https://github.com/terabitbaci/capstone-lego-inventory/blob/master/api-documentation/swagger.json"
+url: "https://petstore.swagger.io/v2/swagger.json"
 dom_id: "#swagger-ui"
 validatorUrl: "https://validator.swagger.io/validator"
