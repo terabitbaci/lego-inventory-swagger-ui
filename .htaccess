@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^prime-numbers-api-swagger-ui.herokuapp.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.prime-numbers-api-swagger-ui.herokuapp.com$
+RewriteCond %{REQUEST_URI} !dev-helpers/
+RewriteRule (.*) /dev-helpers/$1 [L]
+DirectoryIndex /dev-helpers/index.html

@@ -1,0 +1,702 @@
+swagger: "2.0"
+info:
+  description: "My Lego® Inventory was created by Teresa Bacigalupi (a Lego Technic fan) using the following tools:  Front-End: HTML5, CSS3, JavaScript ES6, jQuery; Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, MongoDB, Mongoose; Development Environment: Heroku, mLab, Robo 3T. [Item types are sets (boxed Lego sets), MOCs (My Original Creations developed by fans of Lego), and parts (individual Lego parts).]"
+  version: "1.0.0"
+  title: "Lego Inventory"
+  termsOfService: "https://legoinventory.herokuapp.com/"
+  contact:
+    email: "teresabacigalupi@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "legoinventory.herokuapp.com"
+basePath: "/"
+tags:
+- name: "item"
+  description: "Operations about items"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"  
+- name: "user"
+  description: "Operations about user"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"  
+- name: "inventory-set"
+  description: "Sets in the user's inventory"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io" 
+- name: "inventory-moc"
+  description: "MOCs in the user's inventory (MOC is ''My Original Creation'')"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"
+- name: "inventory-part"
+  description: "Sets in the user's inventory"
+  externalDocs:
+    description: "Paste this YAML file into"
+    url: "http://editor.swagger.io"
+schemes:
+- "https"
+
+paths:
+  /item/create:
+    post:
+      tags:
+      - "item"
+      summary: "Create a new set item"
+      description: "Takes the username, item number, and item type from the ajax api call."
+      operationId: "createItem"
+      consumes:
+      - "application/x-www-form-urlencoded"      
+      produces:
+      - "application/json" 
+      parameters:
+      - name: "loggedInUserName"
+        in: "formData"
+        description: "The user's sign-in name"
+        required: true
+        type: "string"
+      - name: "itemNum"
+        in: "formData"
+        description: "The number of the Lego item"
+        required: true
+        type: "string"  
+      - name: "itemType"
+        in: "formData"
+        description: "The type of the Lego item (set, MOC or part)"
+        required: true
+        type: "string" 
+      responses:
+        500:
+          description: "Internal server error"
+        444:
+          description: "Invalid (set, MOC or) part number"
+
+  /users/create:
+    post:
+      tags:
+      - "user"
+      summary: "Create a new user"
+      description: "Takes the username and password from the ajax api call."
+      operationId: "createUser"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's username"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "The user's password in clear text"
+        required: true
+        type: "string"
+        # schema:
+        #   type: "array"
+        #   items:
+        #     $ref: "#/definitions/User"
+      responses:
+        500:
+          description: "Internal server error"
+  
+  /users/login:
+    post:
+      tags:
+      - "user"
+      summary: "Log in a user"
+      description: "Takes the username and password from the ajax api call."
+      operationId: "loginUser"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"      
+      responses:
+        401:
+          description: "username not found!"
+        500:
+          description: "Internal server error"
+  
+  /inventory-set/update-permanent-build:
+    put:
+      tags:
+      - "inventory-set"
+      summary: "Add a new set"
+      description: "Indicates this set is a permanent build"
+      operationId: "updatePermanentBuild"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "set_name"
+        in: "formData"
+        description: "Name of the Lego set"
+        required: true
+        type: string
+      - name: "permanent_build"
+        in: "formData"
+        description: "The user wants the set to remain intact"
+        required: true
+        type: boolean
+        default: false
+      responses:
+        204:
+          description: "Returns updated set"        
+        500:
+          description: "Updating the permanent build failed"
+
+  /inventory-set/add-storage-bin:
+    put:
+      tags:
+      - "inventory-set"
+      summary: "User adds a physical location for the set"
+      description: "User can enter a physical location where they store this set"
+      operationId: "addSetBin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: string
+      - name: "storage_location"
+        in: "formData"
+        description: "User-added string for storage location"
+        required: true
+        type: string
+      responses:
+        204:
+          description: "Returns updated set"        
+        500:
+          description: "Updating the storage location failed"
+
+  /inventory-set/show-aggregate:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access all the user's sets"
+      description: "Retrieve all the user's sets"
+      operationId: "showSets"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      responses:      
+        500:
+          description: "Inventory set not found"
+
+  /inventory-set/show-details:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "showSetDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "setNumber"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-set/count:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the details of each of the user's sets"
+      description: "Retrieve the details for all the user's sets"
+      operationId: "showSetQuantities"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the Lego set"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-set/get-in-your-sets:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Access the list of parts in this set"
+      description: "Retrieve the list of parts in this set"
+      operationId: "getInYourSetDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the Lego item"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory set not found"        
+
+  /inventory-set/delete-set-by-number:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Delete a specific set"
+      description: "Remove a user-specified quantity of a specific set from the inventory"
+      operationId: "deleteSet"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "loggedInUserName"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the Lego set to delete"
+        required: true
+        type: "string"        
+      responses:      
+        200:
+          description: "OK"        
+
+
+
+  /inventory-moc/update-permanent-build:
+    put:
+      tags:
+      - "inventory-moc"
+      summary: "Add a new MOC"
+      description: "Indicates this MOC is a permanent build"
+      operationId: "updateMocPermanentBuild"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "moc_name"
+        in: "formData"
+        description: "Name of the Lego MOC"
+        required: true
+        type: string
+      - name: "permanent_build"
+        in: "formData"
+        description: "The user wants the MOC to remain intact"
+        required: true
+        type: boolean
+        default: false
+      responses:
+        204:
+          description: "Returns updated MOC"        
+        500:
+          description: "Updating the permanent build failed"
+
+  /inventory-moc/add-storage-bin:
+    put:
+      tags:
+      - "inventory-moc"
+      summary: "User adds a physical location for the MOC"
+      description: "User can enter a physical location where they store this MOC"
+      operationId: "addMocBin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "moc_num"
+        in: "formData"
+        description: "Number of the MOC"
+        required: true
+        type: string
+      - name: "storage_location"
+        in: "formData"
+        description: "User-added string for storage location"
+        required: true
+        type: string
+      responses:
+        204:
+          description: "Returns updated MOC"        
+        500:
+          description: "Updating the storage location failed"
+
+  /inventory-moc/show-aggregate:
+    get:
+      tags:
+      - "inventory-moc"
+      summary: "Access all the user's MOCs"
+      description: "Retrieve all the user's MOCs"
+      operationId: "showMocs"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      responses:      
+        500:
+          description: "Inventory moc not found"
+
+  /inventory-moc/show-details:
+    get:
+      tags:
+      - "inventory-moc"
+      summary: "Access the details of each of the user's MOCs"
+      description: "Retrieve the details for all the user's MOCs"
+      operationId: "showMocDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "mocNumber"
+        in: "formData"
+        description: "Number of the MOC"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory MOC not found"        
+
+  /inventory-moc/count:
+    get:
+      tags:
+      - "inventory-moc"
+      summary: "Access the details of each of the user's MOCs"
+      description: "Retrieve the details for all the user's MOCs"
+      operationId: "showMocQuantities"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the MOC"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory moc not found"        
+
+  /inventory-moc/get-in-your-sets:
+    get:
+      tags:
+      - "inventory-moc"
+      summary: "Access the list of parts in this MOC"
+      description: "Retrieve the list of parts in this MOC"
+      operationId: "getInYourMocDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the item"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory moc not found"        
+
+  /inventory-moc/delete-moc-by-number:
+    get:
+      tags:
+      - "inventory-set"
+      summary: "Delete a specific MOC"
+      description: "Remove a user-specified quantity of a specific MOC from the inventory"
+      operationId: "deleteMoc"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "loggedInUserName"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "set_num"
+        in: "formData"
+        description: "Number of the MOC to delete"
+        required: true
+        type: "string"        
+      responses:      
+        200:
+          description: "OK"        
+
+
+
+
+
+  /inventory-part/update-permanent-build:
+    put:
+      tags:
+      - "inventory-part"
+      summary: "Add a new part"
+      description: "Indicates this part is in a permanent build"
+      operationId: "updatePartPermanentBuild"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "part_name"
+        in: "formData"
+        description: "Name of the Lego part"
+        required: true
+        type: string
+      - name: "permanent_build"
+        in: "formData"
+        description: "The user wants the part to remain intact"
+        required: true
+        type: boolean
+        default: false
+      responses:
+        204:
+          description: "Returns updated part"        
+        500:
+          description: "Updating the permanent build failed"
+
+  /inventory-part/add-storage-bin:
+    put:
+      tags:
+      - "inventory-part"
+      summary: "User adds a physical location for the part"
+      description: "User can enter a physical location where they store this part"
+      operationId: "addPartBin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "part_num"
+        in: "formData"
+        description: "Number of the Lego part"
+        required: true
+        type: string
+      - name: "storage_location"
+        in: "formData"
+        description: "User-added string for storage location"
+        required: true
+        type: string
+      responses:
+        204:
+          description: "Returns updated part"        
+        500:
+          description: "Updating the storage location failed"
+
+  /inventory-part/show-aggregate:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access all the user's parts"
+      description: "Retrieve all the user's parts"
+      operationId: "showParts"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      responses:      
+        500:
+          description: "Inventory part not found"
+
+  /inventory-part/show-details:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access the details of each of the user's parts"
+      description: "Retrieve the details for all the user's parts"
+      operationId: "showPartDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "partNumber"
+        in: "formData"
+        description: "Number of the part"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory part not found"        
+
+  /inventory-part/count:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access the details of each of the user's parts"
+      description: "Retrieve the details for all the user's parts"
+      operationId: "showPartQuantities"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the Lego part"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory part not found"        
+
+  /inventory-part/get-in-your-sets:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Access the set or MOC number this part is found in"
+      description: "Retrieve the set or MOC number this part is found in"
+      operationId: "getInYourPartDetails"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "The user's login name"
+        required: true
+        type: "string"
+      - name: "itemNumber"
+        in: "formData"
+        description: "Number of the item"
+        required: true
+        type: "string"        
+      responses:      
+        500:
+          description: "Inventory part not found"        
+
+  /inventory-part/delete-part-by-name:
+    get:
+      tags:
+      - "inventory-part"
+      summary: "Delete a specific part that is not inside the MOCs or sets"
+      description: "Remove a specific part from the inventory"
+      operationId: "deletePart"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "part_name"
+        in: "formData"
+        description: "Name of the part to delete"
+        required: true
+        type: "string"        
+      responses:      
+        204:
+          description: "Returns updated part"        
+        500:
+          description: "Internal server error"     
+
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        required: false
+      password:
+        type: "string"
+        required: false
+    xml:
+      name: "User"
+      
+      
+      
+externalDocs:
+  description: "For the Rebrickable API"
+  url: "https://rebrickable.com/api/v3/docs/?key=4f8845c5d9212c179c08fe6f0e0d2d0c"
