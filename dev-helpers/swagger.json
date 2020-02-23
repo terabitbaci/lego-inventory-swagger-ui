@@ -20,40 +20,40 @@
       "name": "item",
       "description": "Operations about items",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "user",
       "description": "Operations about user",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "inventory-set",
       "description": "Sets in the user's inventory",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "inventory-moc",
       "description": "MOCs in the user's inventory (MOC is ''My Original Creation'')",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     },
     {
       "name": "inventory-part",
       "description": "Sets in the user's inventory",
       "externalDocs": {
-        "description": "Paste this YAML file into",
-        "url": "http://editor.swagger.io"
+        "description": "Documentation demo",
+        "url": "https://lego-inventory-swagger-ui.herokuapp.com"
       }
     }
   ],
@@ -139,6 +139,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
           "500": {
             "description": "Internal server error"
           }
@@ -217,6 +226,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated set"
           },
@@ -257,6 +275,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated set"
           },
@@ -290,6 +317,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -327,6 +363,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -364,6 +409,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -401,6 +455,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
+          },
           "500": {
             "description": "Inventory set not found"
           }
@@ -439,7 +502,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Sets"
+              }
+            }
           }
         }
       }
@@ -476,6 +545,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Mocs"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated MOC"
           },
@@ -516,6 +594,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Mocs"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated MOC"
           },
@@ -549,6 +636,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Mocs"
+              }
+            }
+          },
           "500": {
             "description": "Inventory moc not found"
           }
@@ -586,6 +682,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Mocs"
+              }
+            }
+          },
           "500": {
             "description": "Inventory MOC not found"
           }
@@ -623,6 +728,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Mocs"
+              }
+            }
+          },
           "500": {
             "description": "Inventory moc not found"
           }
@@ -660,6 +774,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Mocs"
+              }
+            }
+          },
           "500": {
             "description": "Inventory moc not found"
           }
@@ -698,7 +821,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Mocs"
+              }
+            }
           }
         }
       }
@@ -735,6 +864,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated part"
           },
@@ -775,6 +913,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated part"
           },
@@ -808,6 +955,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -845,6 +1001,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -882,6 +1047,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -919,6 +1093,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "500": {
             "description": "Inventory part not found"
           }
@@ -949,6 +1132,15 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
           "204": {
             "description": "Returns updated part"
           },
@@ -963,32 +1155,176 @@
     "User": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
         "username": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
           "type": "string"
         },
         "password": {
           "type": "string"
-        },
-        "phone": {
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Sets": {
+      "type": "object",
+      "properties": {
+        "set_num": {
           "type": "string"
         },
-        "userStatus": {
-          "type": "integer",
-          "format": "int32",
-          "description": "User Status"
+        "set_name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "theme_id": {
+          "type": "number"
+        },
+        "num_parts": {
+          "type": "number"
+        },
+        "set_img_url": {
+          "type": "string"
+        },
+        "set_url": {
+          "type": "string"
+        },
+        "permanent_build": {
+          "type": "number"
+        },
+        "in_wishlist": {
+          "type": "number"
+        },
+        "storage_location": {
+          "type": "string"
+        },
+        "loggedInUserName": {
+          "type": "string"
+        },
+        "addedToDb": {
+          "type": "string",
+          "default": "Date.now"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Mocs": {
+      "type": "object",
+      "properties": {
+        "moc_num": {
+          "type": "string"
+        },
+        "moc_name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "theme_id": {
+          "type": "number"
+        },
+        "num_parts": {
+          "type": "number"
+        },
+        "moc_img_url": {
+          "type": "string"
+        },
+        "moc_url": {
+          "type": "string"
+        },
+        "designer_name": {
+          "type": "string"
+        },
+        "designer_url": {
+          "type": "string"
+        },
+        "permanent_build": {
+          "type": "number"
+        },
+        "in_wishlist": {
+          "type": "number"
+        },
+        "storage_location": {
+          "type": "string"
+        },
+        "loggedInUserName": {
+          "type": "string"
+        },
+        "addedToDb": {
+          "type": "string",
+          "default": "Date.now"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Parts": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "type": "number"
+        },
+        "inv_part_id": {
+          "type": "number"
+        },
+        "is_spare": {
+          "type": "string"
+        },
+        "num_sets": {
+          "type": "number"
+        },
+        "part_name": {
+          "type": "string"
+        },
+        "part_cat_id": {
+          "type": "number"
+        },
+        "part_img_url": {
+          "type": "string"
+        },
+        "part_num": {
+          "type": "string"
+        },
+        "part_url": {
+          "type": "string"
+        },
+        "part_year_from": {
+          "type": "number"
+        },
+        "part_year_to": {
+          "type": "number"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "set_num": {
+          "type": "string"
+        },
+        "from_set_id": {
+          "type": "string"
+        },
+        "from_moc_id": {
+          "type": "string"
+        },
+        "permanent_build": {
+          "type": "number"
+        },
+        "in_wishlist": {
+          "type": "number"
+        },
+        "storage_location": {
+          "type": "string"
+        },
+        "loggedInUserName": {
+          "type": "string"
+        },
+        "addedToDb": {
+          "type": "string",
+          "default": "Date.now"
         }
       },
       "xml": {
